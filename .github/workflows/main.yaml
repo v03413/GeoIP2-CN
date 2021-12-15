@@ -2,7 +2,7 @@ name: update GeoIP2-CN
 
 on:
   workflow_dispatch:
-      
+
   schedule:
     - cron: '0 2 */3 * *'
 
@@ -10,7 +10,7 @@ on:
 jobs:
   # This workflow contains a single job called "build"
   build:
-    name: Generate GeoIP2 database
+    name: Update GeoIP2 database
     runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
