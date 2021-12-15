@@ -1,4 +1,4 @@
-name: update GeoIP2-CN
+name: Update GeoIP2-CN
 
 on:
   workflow_dispatch:
@@ -27,3 +27,23 @@ jobs:
       # Runs a single command using the runners shell
       - name: Update GeoIP2 database
         run: php ./main.php
+
+      - name: Push artifacts to release branch
+        run: |
+          git config --local user.email "49953737+v03413@users.noreply.github.com"
+          git config --local user.name "github-action[bot]"
+          git fetch
+          git checkout release
+          git checkout --orphan release-orphan
+          git rm -rf .
+          git add China_IP_list.txt
+          git commit -am "Updated at $(date)"
+          git branch -D release
+          git branch -m release
+
+      - name: GitHub Push
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: release
+          force: true
