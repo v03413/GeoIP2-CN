@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
   schedule:
-    - cron: '0 2 */3 * *'
+    - cron: '0 2 * * *'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -53,3 +53,6 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: release
           force: true
+
+      - name: Purge CDN Cache
+        run: curl ${{ secrets.CDN_URL }}
