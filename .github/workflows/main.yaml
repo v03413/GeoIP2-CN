@@ -47,3 +47,6 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: release
           force: true
+
+      - name: Purge CDN Cache
+        run: curl ${{ secrets.CDN_URL }}
