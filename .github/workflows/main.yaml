@@ -1,0 +1,27 @@
+name: update GeoIP2-CN
+
+on:
+  schedule:
+    - cron: '0 2 */3 * *'
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    name: Generate GeoIP2 database
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+          extensions: openssl
+
+      # Runs a single command using the runners shell
+      - name: Update GeoIP2 database
+        run: php ./main.php
