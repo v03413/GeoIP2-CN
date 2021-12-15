@@ -1,6 +1,6 @@
 <?php
 $data = [];
-$file = './china_ip_list.txt';
+$file = './China_IP_list.txt';
 $src  = 'https://cdn.jsdelivr.net/gh/Hackl0us/GeoIP2-CN@release/CN-ip-cidr.txt';
 $arr  = explode("\n", file_get_contents($src));
 foreach ($arr as $tmp) {
