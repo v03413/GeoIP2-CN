@@ -1,6 +1,7 @@
 <?php
 $data = [];
-$file = './China_IP_list.txt';
+$dst  = './dst/';
+$name = 'China_IP_list.txt';
 $src  = 'https://cdn.jsdelivr.net/gh/Hackl0us/GeoIP2-CN@release/CN-ip-cidr.txt';
 $arr  = explode("\n", file_get_contents($src));
 foreach ($arr as $tmp) {
@@ -13,8 +14,12 @@ foreach ($arr as $tmp) {
     $data[] = $line;
 }
 
+if (!is_dir($dst)) {
 
-file_put_contents($file, implode("\n", $data));
+    mkdir($dst);
+}
+
+file_put_contents($dst . $name, implode("\n", $data));
 
 echo date('[Y-m-d H:i:s] ') . "成功更新：" . count($data);
 echo "\n";
