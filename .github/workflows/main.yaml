@@ -32,12 +32,18 @@ jobs:
         run: |
           git config --local user.email "49953737+v03413@users.noreply.github.com"
           git config --local user.name "github-action[bot]"
+          
           git fetch
           git checkout release
+          
           git checkout --orphan release-orphan
           git rm -rf .
+          
+          cp -rf ./dst/China_IP_list.txt ./
           git add ./dst/China_IP_list.txt
+          
           git commit -am "Updated at $(date)"
+          
           git branch -D release
           git branch -m release
 
@@ -47,6 +53,3 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: release
           force: true
-
-      - name: Purge CDN Cache
-        run: curl ${{ secrets.CDN_URL }}
