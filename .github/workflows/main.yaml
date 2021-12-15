@@ -36,7 +36,7 @@ jobs:
           git checkout release
           git checkout --orphan release-orphan
           git rm -rf .
-          git add China_IP_list.txt
+          git add ./dst/China_IP_list.txt
           git commit -am "Updated at $(date)"
           git branch -D release
           git branch -m release
